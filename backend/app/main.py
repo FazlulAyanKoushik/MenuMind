@@ -12,6 +12,7 @@ from app.modules.menus.router import router as menus_router
 from app.modules.knowledge_base.router import router as kb_router
 from app.modules.qr.router import router as qr_router
 from app.modules.chats.router import router as chats_router
+from app.modules.admin import model as admin_model
 from app.modules.admin.router import router as admin_router
 from app.modules.owner.router import router as owner_router
 

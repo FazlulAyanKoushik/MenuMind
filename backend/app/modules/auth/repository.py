@@ -1,6 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.modules.auth.model import User
+from app.core.constants import UserRole
 
 
 async def get_user_by_email(db: AsyncSession, email: str) -> User | None:

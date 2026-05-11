@@ -26,9 +26,13 @@ export default function RegisterPage() {
     );
     if (result.success) {
       if (role === "owner") router.push("/owner/dashboard");
-      else router.push("/profile");
+      else router.push("/dashboard");
     } else {
-      setError(result.detail || "Registration failed");
+      if (Array.isArray(result.detail)) {
+        setError(result.detail.map((e: { msg: string }) => e.msg).join("; "));
+      } else {
+        setError(result.detail || "Registration failed");
+      }
     }
   }
 

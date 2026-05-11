@@ -43,12 +43,12 @@ clean:
 
 # Install backend dependencies
 install-backend:
-	cd backend && pip install -r requirements.txt
+	cd backend && uv sync
 
 # Install frontend dependencies
 install-frontend:
 	cd frontend && npm install
 
-# Generate requirements.txt
+# Export requirements.txt from lockfile
 freeze:
-	docker-compose exec backend pip freeze > backend/requirements.txt
+	cd backend && uv export --no-dev > requirements.txt

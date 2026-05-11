@@ -39,7 +39,7 @@ export default function ProfilePage() {
         region: region || null,
       }),
     });
-    alert("Profile updated!");
+    router.push("/dashboard");
   }
 
   if (loading) return <div className="p-8 text-center">Loading...</div>;

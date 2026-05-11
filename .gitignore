@@ -42,3 +42,4 @@ media/
 infra/terraform/.terraform/
 infra/terraform/*.tfstate*
 /PROJECT_INSTRUCTION.md
+/backend/celerybeat-schedule

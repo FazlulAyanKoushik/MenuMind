@@ -21,7 +21,7 @@ export default function LoginPage() {
       const role = result.data.user.role;
       if (role === "admin") router.push("/admin");
       else if (role === "owner") router.push("/owner/dashboard");
-      else router.push("/profile");
+      else router.push("/dashboard");
     } else {
       setError(result.detail || "Login failed");
     }

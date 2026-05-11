@@ -12,6 +12,7 @@ AI-powered food recommendations platform. Customers scan a QR code at a restaura
 - [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/install/)
 - Python 3.12+ (for local dev without Docker)
 - Node.js 20+ (for local frontend dev)
+- [uv](https://docs.astral.sh/uv/) (Python package manager, used instead of pip)
 
 ### Setup
 
@@ -65,16 +66,20 @@ menumind/
 │   │   ├── tasks/       # Celery background jobs
 │   │   └── tests/       # Unit + integration tests
 │   ├── Dockerfile
-│   └── requirements.txt
+│   ├── pyproject.toml   # Dependencies (uv)
+│   └── uv.lock          # Lockfile
 ├── frontend/            # Next.js 14 + Tailwind CSS
 │   ├── app/             # App Router pages
+│   │   ├── dashboard/   # Consumer dashboard
+│   │   └── ...
 │   ├── components/      # Shared UI components
 │   ├── lib/             # API client, auth helpers
 │   └── types/           # TypeScript type definitions
 ├── docs/                # Documentation
 │   ├── architecture/    # System design docs
 │   ├── api/             # API reference
-│   └── diagrams/        # Architecture diagrams
+│   ├── diagrams/        # Architecture diagrams
+│   └── user-journeys.md # User journeys by role
 ├── infra/               # Nginx, Terraform, scripts
 ├── docker-compose.yml
 ├── Makefile
@@ -108,7 +113,7 @@ See [docs/architecture/multi-tenancy.md](docs/architecture/multi-tenancy.md) for
 
 ## Key Features
 
-- **Consumer**: Branded chat page (QR → chat), AI recommendations, image upload (vision), allergy safety warnings, dietary profile
+- **Consumer**: Branded chat page (QR → chat), AI recommendations, image upload (vision), allergy safety warnings, dietary profile, personal dashboard
 - **Owner**: Menu CRUD, CSV bulk upload, knowledge base editor, QR code generator (PNG download), analytics dashboard
 - **Admin**: Tenant management, user management, platform analytics, billing plan assignment
 - **AI**: RAG pipeline (embed → retrieve → rerank → generate), vision-based dish identification, streaming SSE responses
@@ -128,6 +133,7 @@ Base URL: `http://localhost:8000/api/v1`
 | `GET /health` | Health check |
 
 Full API reference: [docs/api/endpoints.md](docs/api/endpoints.md)
+User journeys: [docs/user-journeys.md](docs/user-journeys.md)
 
 ## Development
 

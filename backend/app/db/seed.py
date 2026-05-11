@@ -9,6 +9,10 @@ from app.modules.auth.model import User
 from app.modules.tenants.model import Restaurant
 from app.modules.menus.model import MenuItem
 from app.modules.users.model import ConsumerProfile
+from app.modules.admin import model as admin_model
+from app.modules.knowledge_base import model as kb_model
+from app.modules.qr import model as qr_model
+from app.modules.chats import model as chat_model
 
 
 async def seed():
