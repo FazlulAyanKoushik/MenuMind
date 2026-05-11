@@ -41,3 +41,4 @@ media/
 # Terraform
 infra/terraform/.terraform/
 infra/terraform/*.tfstate*
+/PROJECT_INSTRUCTION.md
