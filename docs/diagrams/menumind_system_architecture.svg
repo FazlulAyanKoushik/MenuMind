@@ -1,0 +1,202 @@
+<svg viewBox="0 0 720 820" xmlns="http://www.w3.org/2000/svg" role="img" font-family="system-ui, -apple-system, sans-serif" font-size="13">
+  <title>MenuMind System Architecture</title>
+  <desc>Multi-tenant restaurant AI system showing Consumer, Owner, Admin portals, FastAPI gateway, AI RAG pipeline, and data layer with PostgreSQL, Pinecone, Redis, and Celery.</desc>
+
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
+    </marker>
+    <linearGradient id="gheader" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="720" height="820" fill="#f8fafc" rx="12"/>
+
+  <!-- Title -->
+  <text x="360" y="32" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">MenuMind — System Architecture</text>
+
+  <!-- ═══════════════ ROW 1: Three User Portals ═══════════════ -->
+
+  <!-- Consumer Portal -->
+  <g>
+    <rect x="20" y="55" width="195" height="125" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.2"/>
+    <rect x="20" y="55" width="195" height="28" rx="10" fill="#22c55e"/>
+    <rect x="20" y="73" width="195" height="10" fill="#22c55e"/>
+    <text x="117" y="73" text-anchor="middle" font-weight="600" font-size="13" fill="#fff">Consumer Portal</text>
+    <text x="30" y="100" font-size="11" fill="#166534">• QR code → branded chat page</text>
+    <text x="30" y="118" font-size="11" fill="#166534">• Food chat (text + image upload)</text>
+    <text x="30" y="136" font-size="11" fill="#166534">• Dietary profile (prefs, allergies)</text>
+    <text x="30" y="154" font-size="11" fill="#166534">• Guest or registered session</text>
+    <text x="30" y="172" font-size="10" fill="#16a34a">Next.js 14 / Tailwind</text>
+  </g>
+
+  <!-- Owner Portal -->
+  <g>
+    <rect x="262" y="55" width="195" height="125" rx="10" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.2"/>
+    <rect x="262" y="55" width="195" height="28" rx="10" fill="#8b5cf6"/>
+    <rect x="262" y="73" width="195" height="10" fill="#8b5cf6"/>
+    <text x="359" y="73" text-anchor="middle" font-weight="600" font-size="13" fill="#fff">Owner Portal</text>
+    <text x="272" y="100" font-size="11" fill="#4c1d95">• Menu management (CRUD)</text>
+    <text x="272" y="118" font-size="11" fill="#4c1d95">• QR code generator &amp; download</text>
+    <text x="272" y="136" font-size="11" fill="#4c1d95">• Analytics dashboard</text>
+    <text x="272" y="154" font-size="11" fill="#4c1d95">• Knowledge base editor</text>
+    <text x="272" y="172" font-size="10" fill="#7c3aed">Next.js 14 / Tailwind</text>
+  </g>
+
+  <!-- Admin Portal -->
+  <g>
+    <rect x="504" y="55" width="195" height="125" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="1.2"/>
+    <rect x="504" y="55" width="195" height="28" rx="10" fill="#f97316"/>
+    <rect x="504" y="73" width="195" height="10" fill="#f97316"/>
+    <text x="601" y="73" text-anchor="middle" font-weight="600" font-size="13" fill="#fff">Admin Portal</text>
+    <text x="514" y="100" font-size="11" fill="#9a3412">• Tenant management</text>
+    <text x="514" y="118" font-size="11" fill="#9a3412">• User &amp; role management</text>
+    <text x="514" y="136" font-size="11" fill="#9a3412">• Platform-wide analytics</text>
+    <text x="514" y="154" font-size="11" fill="#9a3412">• Subscription &amp; billing</text>
+    <text x="514" y="172" font-size="10" fill="#ea580c">Next.js 14 / Tailwind</text>
+  </g>
+
+  <!-- Arrows down from portals to API -->
+  <line x1="117" y1="180" x2="117" y2="218" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="359" y1="180" x2="359" y2="218" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="601" y1="180" x2="601" y2="218" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ═══════════════ ROW 2: API Gateway ═══════════════ -->
+  <g>
+    <rect x="20" y="222" width="679" height="52" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="1"/>
+    <rect x="20" y="222" width="8" height="52" rx="4" fill="#64748b"/>
+    <text x="360" y="244" text-anchor="middle" font-weight="600" font-size="13" fill="#1e293b">FastAPI — API Gateway</text>
+    <text x="360" y="262" text-anchor="middle" font-size="11" fill="#475569">JWT Auth · Multi-Tenant Middleware (X-Restaurant-ID resolver) · Rate Limiting ↓</text>
+  </g>
+
+  <!-- Arrow down to AI -->
+  <line x1="360" y1="274" x2="360" y2="308" stroke="#16a34a" stroke-width="2" marker-end="url(#arr-green)"/>
+
+  <!-- ═══════════════ ROW 3: AI Orchestration Layer ═══════════════ -->
+  <g>
+    <rect x="20" y="312" width="679" height="120" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.2"/>
+    <text x="360" y="334" text-anchor="middle" font-weight="600" font-size="13" fill="#166534">AI Orchestration Layer — LangChain</text>
+
+    <!-- RAG Pipeline -->
+    <rect x="32" y="346" width="148" height="72" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="0.8"/>
+    <text x="106" y="364" text-anchor="middle" font-size="11" font-weight="600" fill="#14532d">RAG Pipeline</text>
+    <text x="106" y="381" text-anchor="middle" font-size="10" fill="#166534">Query → Embed (text-3-small)</text>
+    <text x="106" y="396" text-anchor="middle" font-size="10" fill="#166534">Retrieve (top-k=8) → Rerank</text>
+    <text x="106" y="411" text-anchor="middle" font-size="10" fill="#166534">→ Prompt Build → Stream</text>
+
+    <!-- Vision Agent -->
+    <rect x="196" y="346" width="148" height="72" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="0.8"/>
+    <text x="270" y="364" text-anchor="middle" font-size="11" font-weight="600" fill="#14532d">Vision Agent</text>
+    <text x="270" y="381" text-anchor="middle" font-size="10" fill="#166534">GPT-4o Vision</text>
+    <text x="270" y="396" text-anchor="middle" font-size="10" fill="#166534">Food image → dish ID</text>
+    <text x="270" y="411" text-anchor="middle" font-size="10" fill="#166534">→ key ingredients</text>
+
+    <!-- Profile Enricher -->
+    <rect x="360" y="346" width="148" height="72" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="0.8"/>
+    <text x="434" y="364" text-anchor="middle" font-size="11" font-weight="600" fill="#14532d">Profile Enricher</text>
+    <text x="434" y="381" text-anchor="middle" font-size="10" fill="#166534">Inject allergies</text>
+    <text x="434" y="396" text-anchor="middle" font-size="10" fill="#166534">Inject preferences</text>
+    <text x="434" y="411" text-anchor="middle" font-size="10" fill="#166534">into system prompt</text>
+
+    <!-- Response Guard -->
+    <rect x="524" y="346" width="160" height="72" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="0.8"/>
+    <text x="604" y="364" text-anchor="middle" font-size="11" font-weight="600" fill="#14532d">Response Guard</text>
+    <text x="604" y="381" text-anchor="middle" font-size="10" fill="#166534">Allergy safety filter</text>
+    <text x="604" y="396" text-anchor="middle" font-size="10" fill="#166534">Warn + safe alternative</text>
+    <text x="604" y="411" text-anchor="middle" font-size="10" fill="#166534">Token usage logging</text>
+  </g>
+
+  <!-- Arrows down from AI to data layer -->
+  <line x1="200" y1="432" x2="200" y2="468" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="520" y1="432" x2="520" y2="468" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <text x="360" y="462" text-anchor="middle" font-size="10" fill="#64748b">data layer</text>
+
+  <!-- ═══════════════ ROW 4: Data / Storage Layer ═══════════════ -->
+  <!-- Vector DB -->
+  <g>
+    <rect x="20" y="472" width="210" height="82" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1"/>
+    <text x="125" y="492" text-anchor="middle" font-weight="600" font-size="12" fill="#4c1d95">Vector Database</text>
+    <text x="125" y="509" text-anchor="middle" font-size="11" fill="#6d28d9">Pinecone</text>
+    <text x="125" y="526" text-anchor="middle" font-size="10.5" fill="#7c3aed">Per-restaurant namespace</text>
+    <text x="125" y="541" text-anchor="middle" font-size="10.5" fill="#7c3aed">(rest_{restaurant_id})</text>
+  </g>
+
+  <!-- Relational DB -->
+  <g>
+    <rect x="254" y="472" width="210" height="82" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+    <text x="359" y="492" text-anchor="middle" font-weight="600" font-size="12" fill="#1e40af">Relational Database</text>
+    <text x="359" y="509" text-anchor="middle" font-size="11" fill="#2563eb">PostgreSQL 16</text>
+    <text x="359" y="526" text-anchor="middle" font-size="10.5" fill="#3b82f6">Row-level tenant isolation</text>
+    <text x="359" y="541" text-anchor="middle" font-size="10.5" fill="#3b82f6">Async via asyncpg</text>
+  </g>
+
+  <!-- Cache + Queue + Files -->
+  <g>
+    <rect x="488" y="472" width="210" height="82" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1"/>
+    <text x="593" y="492" text-anchor="middle" font-weight="600" font-size="12" fill="#92400e">Cache + Queue + Files</text>
+    <text x="593" y="509" text-anchor="middle" font-size="11" fill="#b45309">Redis: session, rate limit</text>
+    <text x="593" y="526" text-anchor="middle" font-size="10.5" fill="#d97706">Celery: async embed jobs</text>
+    <text x="593" y="541" text-anchor="middle" font-size="10.5" fill="#d97706">S3: food images storage</text>
+  </g>
+
+  <!-- ═══════════════ ROW 5: Knowledge Ingestion ═══════════════ -->
+  <line x1="125" y1="554" x2="125" y2="588" stroke="#94a3b8" stroke-width="1" marker-end="url(#arr)"/>
+
+  <text x="360" y="602" text-anchor="middle" font-size="10" fill="#64748b">knowledge ingestion (per restaurant)</text>
+
+  <g>
+    <rect x="20" y="610" width="150" height="50" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.8"/>
+    <text x="95" y="631" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Menu Upload</text>
+    <text x="95" y="648" text-anchor="middle" font-size="10" fill="#64748b">CSV / PDF / manual entry</text>
+  </g>
+  <g>
+    <rect x="188" y="610" width="150" height="50" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.8"/>
+    <text x="263" y="631" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Knowledge Base</text>
+    <text x="263" y="648" text-anchor="middle" font-size="10" fill="#64748b">FAQs, specials, story</text>
+  </g>
+  <g>
+    <rect x="356" y="610" width="150" height="50" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.8"/>
+    <text x="431" y="631" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Embedding Pipeline</text>
+    <text x="431" y="648" text-anchor="middle" font-size="10" fill="#64748b">Chunk → text-embed-3-small</text>
+  </g>
+  <g>
+    <rect x="524" y="610" width="160" height="50" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="0.8"/>
+    <text x="604" y="631" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">Namespace Store</text>
+    <text x="604" y="648" text-anchor="middle" font-size="10" fill="#16a34a">Isolated per restaurant_id</text>
+  </g>
+
+  <!-- Arrows between ingestion -->
+  <line x1="170" y1="635" x2="186" y2="635" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="338" y1="635" x2="354" y2="635" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="506" y1="635" x2="522" y2="635" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+  <!-- ═══════════════ ROW 6: Delivery ═══════════════ -->
+  <g>
+    <rect x="20" y="686" width="679" height="42" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="0.8"/>
+    <text x="360" y="700" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Delivery</text>
+    <text x="360" y="716" text-anchor="middle" font-size="10.5" fill="#64748b">Docker Compose · Nginx reverse proxy · AWS ECS / Railway (production)</text>
+  </g>
+
+  <!-- ═══════════════ Legend ═══════════════ -->
+  <g>
+    <rect x="20" y="748" width="12" height="12" rx="3" fill="#f0fdf4" stroke="#22c55e" stroke-width="1"/>
+    <text x="36" y="758" font-size="11" fill="#475569">Consumer / AI</text>
+    <rect x="140" y="748" width="12" height="12" rx="3" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1"/>
+    <text x="156" y="758" font-size="11" fill="#475569">Owner</text>
+    <rect x="230" y="748" width="12" height="12" rx="3" fill="#fff7ed" stroke="#f97316" stroke-width="1"/>
+    <text x="246" y="758" font-size="11" fill="#475569">Admin</text>
+    <rect x="320" y="748" width="12" height="12" rx="3" fill="#e2e8f0" stroke="#64748b" stroke-width="1"/>
+    <text x="336" y="758" font-size="11" fill="#475569">Infrastructure</text>
+  </g>
+
+  <!-- Tech stack footer -->
+  <text x="20" y="790" font-size="10" fill="#94a3b8">Backend: FastAPI · SQLAlchemy 2.0 · PostgreSQL 16 · Redis 7 · Celery · Pinecone · OpenAI · LangChain</text>
+  <text x="20" y="806" font-size="10" fill="#94a3b8">Frontend: Next.js 14 (App Router) · TypeScript · Tailwind CSS · Docker</text>
+</svg>
